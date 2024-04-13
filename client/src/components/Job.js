@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useAppContext } from '../context/appContext'
 import Wrapper from '../assets/wrappers/Job'
 import JobInfo from './JobInfo'
-import { JOB_STATUS, JOB_TYPE } from '../constants/global'
+import { JOB_STATUS, JOB_TYPE,CITIES } from '../constants/global'
 moment.locale('vi')
 const Job = ({
   _id,
@@ -31,7 +31,7 @@ const Job = ({
       </header>
       <div className='content'>
         <div className='content-center'>
-          <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
+          <JobInfo icon={<FaLocationArrow />} text={CITIES[jobLocation]} />
           <JobInfo icon={<FaCalendarAlt />} text={date} />
           <JobInfo icon={<FaBriefcase />} text={JOB_TYPE[jobType] } />
           <div className={`status ${status}`}>{JOB_STATUS[status]}</div>

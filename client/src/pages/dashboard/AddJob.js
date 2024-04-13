@@ -19,6 +19,7 @@ const AddJob = () => {
     clearValues,
     createJob,
     editJob,
+    cities
   } = useAppContext()
 
   const handleSubmit = (e) => {
@@ -63,12 +64,12 @@ const AddJob = () => {
             handleChange={handleJobInput}
           />
           {/* location */}
-          <FormRow
-            type='text'
+          <FormRowSelect
             labelText='Khu vực'
             name='jobLocation'
             value={jobLocation}
             handleChange={handleJobInput}
+            list={cities.filter(option=>option.name)}
           />
           {/* job status */}
           <FormRowSelect

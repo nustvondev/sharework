@@ -20,6 +20,10 @@ import connectDB from './db/connect.js';
 // routers
 import authRouter from './routes/authRoutes.js';
 import jobsRouter from './routes/jobsRoutes.js';
+import citiesRouter from './routes/citiesRoutes.js';
+import keyCodeRoutes from './routes/keyCodeRoutes.js';
+
+
 
 // middleware
 import notFoundMiddleware from './middleware/not-found.js';
@@ -42,6 +46,8 @@ app.use(mongoSanitize());
 app.use(cookieParser());
 app.set('trust proxy', 'loopback') // specify a single subnet
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/cities',citiesRouter);
+app.use('/api/v1/keycodes',keyCodeRoutes);
 app.use('/api/v1/jobs', authenticateUser, jobsRouter);
 
 // only when ready to deploy

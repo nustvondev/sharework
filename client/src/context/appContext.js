@@ -32,6 +32,8 @@ import {
   CHANGE_PAGE,
   GET_CURRENT_USER_BEGIN,
   GET_CURRENT_USER_SUCCESS,
+  GET_CITIES_SUCCESS,
+  GET_CITIES_BEGIN
 } from './actions';
 
 const initialState = {
@@ -63,6 +65,7 @@ const initialState = {
   searchType: 'all',
   sort: 'latest',
   sortOptions: [{name:'latest',description:"gần nhất"}, {name:'oldest',description:"cũ nhất"}, {name:'a-z',description:"a->z"}, {name:'z-a',description:"z->a"}],
+  cities:[]
 };
 
 const AppContext = React.createContext();
@@ -205,7 +208,23 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
+const getCities=async()=>{
+  let url=`/cities`;
+  dispatch({type:GET_CITIES_BEGIN })
 
+  try {
+    const {data}= await authFetch(url);
+    const {cities}=data;
+    dispatch({
+      type: GET_CITIES_SUCCESS,
+      payload:{
+        cities
+      }
+    })
+  } catch (error) {
+    logoutUser();
+  }
+}
   const setEditJob = (id) => {
     dispatch({ type: SET_EDIT_JOB, payload: { id } });
   };
@@ -308,6 +327,7 @@ const AppProvider = ({ children }) => {
         showStats,
         clearFilters,
         changePage,
+        getCities
       }}
     >
       {children}
